@@ -2,7 +2,7 @@ Sure! Here's a polished `README.md` for your GitHub project, formatted in Markdo
 
 ---
 
-# ☕ Confirm Check Bill Java Service with systemd
+# ☕ Java Service with systemd
 
 This project provides a step-by-step guide to running your Java `.jar` file as a **background Linux service** using **systemd**.
 
@@ -14,7 +14,7 @@ This project provides a step-by-step guide to running your Java `.jar` file as a
 
 ## 📦 Prerequisites
 
-- A compiled Java `.jar` file (e.g., `ConfirmCheckBillCV.jar`)
+- A compiled Java `.jar` file (e.g., `your_jar_name.jar`)
 - A Linux environment with `systemd`
 - Basic terminal and sudo access
 
@@ -25,8 +25,8 @@ This project provides a step-by-step guide to running your Java `.jar` file as a
 ### 🔹 Step 1: Move Your .jar to a Fixed Location
 
 ```bash
-sudo mkdir -p /opt/confirm-check-bill
-sudo mv ConfirmCheckBillCV.jar /opt/confirm-check-bill/
+sudo mkdir -p /opt/your-jar-file-folder-name
+sudo mv your_jar_name.jar /opt/your-jar-file-folder-name/
 ```
 
 ---
@@ -36,7 +36,7 @@ sudo mv ConfirmCheckBillCV.jar /opt/confirm-check-bill/
 Open a new systemd service file with your text editor of choice:
 
 ```bash
-sudo nano /etc/systemd/system/confirm-check-bill.service
+sudo nano /etc/systemd/system/your-jar-file-folder-name.service
 ```
 
 Paste the following into the file (adjust paths and `User=` as needed):
@@ -48,13 +48,13 @@ After=network.target
 
 [Service]
 User=alam
-ExecStart=/usr/bin/java -jar /opt/confirm-check-bill/ConfirmCheckBillCV.jar
-WorkingDirectory=/opt/confirm-check-bill
+ExecStart=/usr/bin/java -jar /opt/your-jar-file-folder-name/your_jar_name.jar
+WorkingDirectory=/opt/your-jar-file-folder-name
 SuccessExitStatus=143
 Restart=always
 RestartSec=5
-StandardOutput=append:/var/log/confirm-check-bill.log
-StandardError=append:/var/log/confirm-check-bill-error.log
+StandardOutput=append:/var/log/your-jar-file-folder-name.log
+StandardError=append:/var/log/your-jar-file-folder-name-error.log
 
 [Install]
 WantedBy=multi-user.target
@@ -69,8 +69,8 @@ WantedBy=multi-user.target
 ```bash
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
-sudo systemctl enable confirm-check-bill.service
-sudo systemctl start confirm-check-bill.service
+sudo systemctl enable your-jar-file-folder-name.service
+sudo systemctl start your-jar-file-folder-name.service
 ```
 
 ---
@@ -80,13 +80,13 @@ sudo systemctl start confirm-check-bill.service
 To check if the service is running:
 
 ```bash
-sudo systemctl status confirm-check-bill.service
+sudo systemctl status your-jar-file-folder-name.service
 ```
 
 To view real-time logs:
 
 ```bash
-journalctl -u confirm-check-bill.service -f
+journalctl -u your-jar-file-folder-name.service -f
 ```
 
 ---
